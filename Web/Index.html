@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/Index.css">
+  <title>Timese Land</title>
+  <script>
+    function toggleForm() {
+      var x = document.getElementById("login-form");
+      if (x.style.display === "none") {
+        x.style.display = "flex";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
+</head>
+<body>
+    <header>
+    <div>
+    <section>
+        <div class="menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#" onclick="toggleForm()">Join Us</a></li>
+        </ul>
+    </div>
+        <div class="form-box" id="login-form" style="display:none">
+            <div class="form-value">
+                <form action="">
+                    <h2>Login</h2>
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="email" required placeholder="name@gmail.com" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="forget">
+                        <label for=""><input type="checkbox">Remember Me</label>  
+                        <label for="Forget Password"><a href="#">Forget Password</a></label>    
+                        
+                      
+                    </div>
+                    <button type="button"><span></span>Log in</button>
+                    <div class="register">
+                        <p>Don't have a account <a href="#">Register</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</header>
+<footer>
+    <div class="bgf">
+
+    </div>
+</footer>
+    
+</body>
+</html>
