@@ -1,0 +1,26 @@
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+  }
+  #space {
+    width: 150px; /* Đặt chiều rộng của ảnh là 300px */
+    height: 150px; /* Tự động tính toán chiều cao tương ứng để giữ tỷ lệ hình ảnh */
+    position: absolute; /* Đặt vị trí tuyệt đối cho ảnh */
+    top: 15%; /* Đặt vị trí dọc của ảnh là 50% so với phần tử cha */
+    left: 90%; /* Đặt vị trí ngang của ảnh là 50% so với phần tử cha */
+    transform: translate(-50%, -50%); /* Dịch chuyển ảnh theo nửa chiều rộng và nửa chiều cao của chính ảnh */
+    opacity: 0.8;
+  }
+  #times {
+    width: 150px; /* Đặt chiều rộng của ảnh là 300px */
+    height: 150px; /* Tự động tính toán chiều cao tương ứng để giữ tỷ lệ hình ảnh */
+    position: absolute; /* Đặt vị trí tuyệt đối cho ảnh */
+    top: 40%; /* Đặt vị trí dọc của ảnh là 50% so với phần tử cha */
+    left: 90%; /* Đặt vị trí ngang của ảnh là 50% so với phần tử cha */
+    transform: translate(-50%, -50%); /* Dịch chuyển ảnh theo nửa chiều rộng và nửa chiều cao của chính ảnh */
+    opacity: 0.7;
+  }

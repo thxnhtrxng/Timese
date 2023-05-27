@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/wait.css">
+</head>
+<body>
+    <audio autoplay loop id="background-audio">
+        <source src="../image/call my name.mp3" type="audio/mp3" >
+      </audio>
+    <video autoplay muted loop id="background-video">
+      <source src="../image/y2mate.com - The Search_1080p.mp4" type="video/mp4">
+    </video>
+    <a href="../html/solar.html">
+        <img src="../image/space.png" alt="space" id="space">
+      </a>
+      <a href="https://example.com">
+        <img src="../image/times.png" alt="times" id="times">
+      </a>
+   
+      
+      <script>
+        document.addEventListener('click', function() {
+            var audio = document.getElementById('background-audio');
+            audio.play();
+        });
+    </script>
+  </body>
+</html>
