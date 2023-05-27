@@ -364,41 +364,55 @@ $(document).mouseup(function() {
 $(document).ready(function(){
   start.click();
 });	
-//SUN
+//show noti
 
 function handleButtonClick(buttonId) {
 	const button = document.getElementById(buttonId);
 	const notification = document.querySelector(`.notification${buttonId}`);
 	const images = document.querySelectorAll(`.notification${buttonId} img`);
-
-	let isActive = false; // Track the current state of the notification
-
+  
+	let activeButtonId = null; // Lưu trữ ID của nút đang được chọn
+  
 	button.addEventListener('click', () => {
-	// Toggle the notification visibility
-	isActive = !isActive;
-
-	if (isActive) {
-		// Hide all images first
+	  // Nếu nút đang được bấm lại hoặc bấm nút khác
+	  if (activeButtonId === buttonId || activeButtonId !== null) {
+		// Ẩn ảnh của nút hiện tại
 		images.forEach(image => {
-		image.style.display = 'none';
+		  image.style.display = 'none';
 		});
-
-		// Show a random image
+		// Loại bỏ lớp "active" cho nút hiện tại và thông báo của nó
+		button.classList.remove('active');
+		notification.classList.remove('active');
+		// Đặt activeButtonId về null để bỏ chọn nút
+		activeButtonId = null;
+	  } else {
+		// Ẩn ảnh của tất cả các nút khác
+		const allButtons = document.querySelectorAll('button');
+		allButtons.forEach(btn => {
+		  const btnId = btn.id;
+		  if (btnId !== buttonId) {
+			const otherImages = document.querySelectorAll(`.notification${btnId} img`);
+			otherImages.forEach(image => {
+			  image.style.display = 'none';
+			});
+		  }
+		});
+		// Ẩn ảnh của nút hiện tại trước khi hiển thị ảnh mới
+		images.forEach(image => {
+		  image.style.display = 'none';
+		});
+		// Hiển thị ảnh của nút hiện tại
 		const randomIndex = Math.floor(Math.random() * images.length);
 		const randomImage = images[randomIndex];
 		randomImage.style.display = 'block';
-	} else {
-		// Hide all images
-		images.forEach(image => {
-		image.style.display = 'none';
-		});
-	}
-
-	// Toggle the "active" class for the notification
-	notification.classList.toggle('active');
+		// Đặt lớp "active" cho nút hiện tại và thông báo của nó
+		button.classList.add('active');
+		notification.classList.add('active');
+		// Đặt activeButtonId thành ID của nút hiện tại
+		activeButtonId = buttonId;
+	  }
 	});
-}
-
+  }
 // Gán sự kiện cho các nút tương ứng
 handleButtonClick('Sun');
 handleButtonClick('Mercury');
