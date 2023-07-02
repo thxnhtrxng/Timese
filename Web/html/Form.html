@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />  
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="../css/Form.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../image/logo.png" alt="Logo" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="Thanhqua.html">Trang chủ</a></li>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div id="quiz"></div>
+      <div id="timer"></div>
+      <form>
+        <h2>Bắt đầu làm bài</h2>
+        <label for="monhoc">Chọn môn học:</label>
+        <select id="monhoc" name="monhoc">
+          <option value="toan">Toán học</option>
+          <option value="vatly">Vật lý</option>
+          <option value="hoa">Hóa học</option>
+        </select>
+        <button type="submit" id="startButton">Bắt đầu</button>
+      </form>
+    </main>
+<script>
+  const questions = [
+    {
+      question: "What is the capital of France?",
+      answers: ["London", "Paris", "Madrid", "Berlin"],
+      correctAnswer: "Paris"
+    },
+    {
+      question: "What is the largest organ in the human body?",
+      answers: ["Heart", "Brain", "Skin", "Liver"],
+      correctAnswer: "Skin"
+    },
+    {
+      question: "What is the only continent that is also a country?",
+      answers: ["North America", "Europe", "Australia", "Asia"],
+      correctAnswer: "Australia"
+    }
+  ];
+  const state = {
+  currentQuestion: 0,
+  score: 0,
+  timer: null,
+};
+
+function startQuiz() {
+  const quizContainer = document.querySelector('#quiz');
+  quizContainer.innerHTML = '';
+
+  const timerElement = document.createElement('p');
+  timerElement.classList.add('timer');
+  quizContainer.appendChild(timerElement);
+
+  let timeLeft = 1800; // 3 minutes in seconds
+
+  state.timer = setInterval(() => { 
+    timeLeft--;
+    timerElement.textContent = `Time left: ${Math.floor(timeLeft / 60)}:${(timeLeft % 60)
+      .toString()
+      .padStart(2, '0')}`; // Format time as MM:SS
+    if (timeLeft <= 0) {
+      clearInterval(state.timer);
+      finishQuiz();
+    }
+  }, 1000);
+
+  const currentQuestion = state.currentQuestion;
+  const question = questions[currentQuestion];
+
+  const questionContainer = document.createElement('div');
+  questionContainer.classList.add('cauhoi');
+
+  const questionNumber = document.createElement('h2');
+  questionNumber.textContent = `Question ${currentQuestion + 1}:`;
+  questionContainer.appendChild(questionNumber);
+
+  const questionText = document.createElement('p');
+  questionText.textContent = question.question;
+  questionContainer.appendChild(questionText);
+
+  const answerList = document.createElement('ul');
+  question.answers.forEach((answer, index) => {
+    const answerItem = document.createElement('li');
+    const answerRadio = document.createElement('input');
+    answerRadio.type = 'radio';
+    answerRadio.id = `answer_${index}`;
+    answerRadio.name = 'answer';
+    answerRadio.value = answer;
+
+    const answerLabel = document.createElement('label');
+    answerLabel.textContent = answer;
+    answerLabel.setAttribute('for', `answer_${index}`);
+
+    answerItem.appendChild(answerRadio);
+    answerItem.appendChild(answerLabel);
+    answerList.appendChild(answerItem);
+  });
+
+  const submitButton = document.createElement('button');
+  submitButton.type = 'button';
+  submitButton.textContent = 'Submit';
+  submitButton.addEventListener('click', submitAnswer);
+
+  questionContainer.appendChild(answerList);
+  questionContainer.appendChild(submitButton);
+
+  quizContainer.appendChild(questionContainer);
+}
+
+function submitAnswer() {
+  const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+  if (!selectedAnswer) {
+    return; // Nếu không có phương án nào được chọn, không xử lý tiếp
+  }
+
+  const currentQuestion = state.currentQuestion;
+  const question = questions[currentQuestion];
+  const answer = selectedAnswer.value;
+
+  if (answer === question.correctAnswer) {
+    state.score++; // Tăng điểm nếu câu trả lời đúng
+  }
+
+  state.currentQuestion++;
+
+  if (state.currentQuestion >= questions.length) {
+    finishQuiz();
+  } else {
+    showNextQuestion();
+  }
+}
+
+function showNextQuestion() {
+  const quizContainer = document.querySelector('#quiz');
+  quizContainer.innerHTML = '';
+
+  const currentQuestion = state.currentQuestion;
+  const question = questions[currentQuestion];
+
+  const questionContainer = document.createElement('div');
+  questionContainer.classList.add('cauhoi');
+
+  const questionNumber = document.createElement('h2');
+  questionNumber.textContent = `Question ${currentQuestion + 1}:`;
+  questionContainer.appendChild(questionNumber);
+
+  const questionText = document.createElement('p');
+  questionText.textContent = question.question;
+  questionContainer.appendChild(questionText);
+
+  const answerList = document.createElement('ul');
+  question.answers.forEach((answer, index) => {
+    const answerItem = document.createElement('li');
+    const answerRadio = document.createElement('input');
+    answerRadio.type = 'radio';
+    answerRadio.id = `answer_${index}`;
+    answerRadio.name = 'answer';
+    answerRadio.value = answer;
+
+    const answerLabel = document.createElement('label');
+    answerLabel.textContent = answer;
+    answerLabel.setAttribute('for', `answer_${index}`);
+
+    answerItem.appendChild(answerRadio);
+    answerItem.appendChild(answerLabel);
+    answerList.appendChild(answerItem);
+  });
+
+  const submitButton = document.createElement('button');
+  submitButton.type = 'button';
+  submitButton.textContent = 'Submit';
+  submitButton.addEventListener('click', submitAnswer);
+
+  questionContainer.appendChild(answerList);
+  questionContainer.appendChild(submitButton);
+
+  quizContainer.appendChild(questionContainer);
+
+  const timerElement = document.querySelector('.timer');
+  timerElement.style.display = 'block'; // Hiển thị thời gian khi hiển thị câu hỏi tiếp theo
+}
+function finishQuiz() {
+  clearInterval(state.timer); // Dừng đếm thời gian
+
+  const quizContainer = document.querySelector('#quiz');
+  quizContainer.innerHTML = ''; 
+
+  const scoreElement = document.createElement('p');
+  scoreElement.textContent = `Your score is: ${state.score}/${questions.length}`;
+  quizContainer.appendChild(scoreElement);
+}
+
+const startButton = document.querySelector('#startButton');
+startButton.addEventListener('click', () => {
+  startButton.disabled = true; // Disable the "Bắt đầu" button after it is clicked
+  startQuiz();
+});
+</script>
+  </body>
+</html>

@@ -1,33 +1,37 @@
-<?php
-// Kết nối đến cơ sở dữ liệu
-$conn = mysqli_connect("localhost", "root", "", "signin");
+<?php session_start();?>
+ <?php 
 
-// Kiểm tra kết nối
-if (!$conn) {
-    die("Kết nối đến cơ sở dữ liệu thất bại: " . mysqli_connect_error());
-}
+    $admin = $_POST['ten'];$_SESSION["a"]= $admin;
+    $pass = $_POST['pass'];
+    $con = new mysqli('localhost','root','','signin',3306);
+ //bỏ hết kí hiệu đặc biệt
+   /* $ten = stripcslashes($ten);
+    $ten = mysqli_real_escape_string($con,$ten);
+    $pass = stripcslashes($pass);
+    $pass = mysqli_real_escape_string($con,$pass);*/
+//prepear statements(chuẩn bị câu lệnh trước )
+$stmt =$con->prepare("SELECT * FROM users WHERE email = ? AND matkhau = ?");
 
-// Xử lý dữ liệu đăng nhập từ form
-if (isset($_POST['email']) && isset($_POST['matkhau'])) {
-    $email = $_POST['email'];
-    $password = $_POST['matkhau'];
+$stmt ->bind_param("ss",$admin,$pass);
 
-    // Truy vấn để kiểm tra thông tin đăng nhập
-    $query = "SELECT * FROM users WHERE email ='$email' AND matkhau ='$password'";
-    $result = mysqli_query($conn, $query);
+$stmt->execute();
+$stmt->store_result();
 
-    // Kiểm tra kết quả truy vấn
-    if (mysqli_num_rows($result) == 1) {
-        // Đăng nhập thành công
-        // Chuyển hướng đến trang hehe.html
-        header("Location: ../html/hehe.html");
-        exit(); // Kết thúc script để chuyển hướng ngay lập tức
-    } else {
-        // Đăng nhập thất bại
-        echo "Đăng nhập thất bại!";
+if($stmt->num_rows()==1){ 
+    /*
+    $sql ="select * from nguoidung where ten = '$ten' and mat_khau = '$pass'";
+    $kq = mysqli_query($con,$sql);
+    $count = mysqli_num_rows($kq);
+
+    if( $count > 0 ){*/
+        #echo 'dung';
+    
+        header("Location:../html/where.html");
+        
+    }else{
+        header("Location../html/Index.html");
     }
-}
+$con->close();
 
-// Đóng kết nối đến cơ sở dữ liệu
-mysqli_close($conn);
+
 ?>

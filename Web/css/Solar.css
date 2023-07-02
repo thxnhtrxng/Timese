@@ -541,4 +541,13 @@ button{
   display: block;
   margin: 0 auto;
 }
+#bhole {
+    width: 180px; /* Đặt chiều rộng của ảnh là 300px */
+    height: 150px; /* Tự động tính toán chiều cao tương ứng để giữ tỷ lệ hình ảnh */
+    position: fixed; /* Đặt vị trí tuyệt đối cho ảnh */
+    top: 9%; /* Đặt vị trí dọc của ảnh là 50% so với phần tử cha */
+    left: 92%; /* Đặt vị trí ngang của ảnh là 50% so với phần tử cha */
+    transform: translate(-50%, -50%); /* Dịch chuyển ảnh theo nửa chiều rộng và nửa chiều cao của chính ảnh */
+    opacity: 0.7;
+  }
 

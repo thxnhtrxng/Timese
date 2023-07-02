@@ -4,48 +4,46 @@
 <head>
   <link rel="stylesheet" href="../css/Index.css">
   <title>Timese Land</title>
-  <script src="../js/login.js" defer></script>	
+  <script src="" defer></script>	
 </head>
 <body>
-    <header>
-    <div>
+    <header>    
     <section>
         <div class="name">
             <img class="nimage"src="../image/Timese Land.png" alt="Background Image">
         </div>
-        <div class="menu">
+        <nav class="menu">
             <a href="javascript:location.reload(true)" class="logo-link">
                 <img class="logo-image" src="../image/logo.png" alt="Logo">
-              </a>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a onclick="toggleForm()">Join Us</a></li>
-        </ul>
-    </div>
-        <div class="form-box" id="login-form" style="display:none">
+            </a>
+            <ul>
+                <li><a href="../html/contact.html">Contact Us</a></li>
+                <li><a href="../html/about.html">About Us</a></li>
+                <li><a href="../html/project.html">Project</a></li>
+                <li><a onclick="toggleForm()">Join Us</a></li>
+            </ul>
+        </nav>
+        </section>
+        </header>
+        <div class="form-box"id="login-form">  
             <div class="form-value">
-                <form action='../php/login.php' method="POST">
+                <form>
                     <h2>Login</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" name="email" required placeholder="name@gmail.com" required>
-                        <label for="email">Email</label>
+                        <input type="email" id="email" name="ten" required placeholder="name@gmail.com" required>
+                        <label for="email">Email</label>        
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="matkhau"required>
-                        <label for="password">Password</label>
+                        <input type="password" id="password" name="pass" required>
+                        <label for="password">Password</label>     
                     </div>
                     <div class="forget">
-                        <label for=""><input type="checkbox">Remember Me</label>  
-                        <label for="Forget Password"><a href="#">Forget Password</a></label>    
-                        
-                      
+                        <label for="" ><input type="checkbox" style="cursor:pointer ;">Remember Me</label>  
+                        <label for="Forget Password"><a href="#">Forget Password</a></label>                     
                     </div>
-                    <button type="submit" name="dangnhap"><span></span>Log in</button>
+                    <button type="submit"><span></span>Log in</button>
                     <div class="register">
                         <p>Don't have a account <a href="#">Register</a></p>
                     </div>
@@ -53,14 +51,27 @@
             </div>
         </div>
     </section>
+  <script>
+		// Kiểm tra thông tin đăng nhập khi người dùng submit form
+		document.querySelector('form').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var email = document.querySelector('#email').value;
+			var password = document.querySelector('#password').value;
+			if ( email === 'admin@gmail.com' && password === '123' || email === 'trungdepchai@gmail.com' && password === 'trungdepchai') {
+				window.location.href = '../html/where.html'; // Chuyển đến trang chính
+			} else {
+				alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+			}
+		});
+	</script>
+    
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</header>
-<footer>
-    <div class="bgf">
 
-    </div>
-</footer>
+
+    
+    <!---- OUR PROJECT> --->
+
     
 </body>
 </html>
